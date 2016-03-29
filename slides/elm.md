@@ -30,7 +30,7 @@ We use Elm to make our user interface and give it behavior.
 
 ## Example
 
-```
+```elm
 module Hello where
 
 import Html exposing(p, text)
@@ -59,7 +59,7 @@ Feel gross yet?
 
 ## That's what React does too.
 
-```
+```javascript
 var HelloMessage = React.createClass({
   render: function () {
     return <h1>Hello {this.props.message}!</h1>;
@@ -88,7 +88,7 @@ React.render(<HelloMessage message="World" />, document.body);
 
 Elm's virtual DOM support is separate:
 
-```
+```bash
 $ elm package install evancz/elm-html
 ```
 
@@ -162,12 +162,32 @@ Call it as
 add 1 2
 ```
 
+--- 
 
+## Type annotations
+
+We can enforce data types for our functions so Elm can help us out.
+
+The annotation is simply a flow of types, with the last being the return type.
+
+```
+functionName: TypeOfArg1-> TypeOfArg2 -> TypeOfArg3 -> ReturnType
+```
+
+Example:
+
+```
+add: Float -> Float -> Float
+add number1 number2 = 
+  number1 + number2
+```
 
 
 ---
 
-## Html
+## Html functions
+
+`elm-html` module exposes many functions for building up virtual DOM nodes.
 
 The `main` function can render HTML if the HTML module is included.
 
@@ -186,10 +206,11 @@ main =
   p [] [text "Hello World"]
 ```
 
-p and text are two functions
+p and text are two functions from `elm-html`
 
 `p` takes two lists
-* a list of attributes
+
+* a list of attributes (can be empty)
 * a list of child elements
      
 `text` takes a string of text to display.
@@ -198,13 +219,16 @@ p and text are two functions
 
 ## HTML functions are uniform.
 
+Each takes attributes and elements. So we can nest them like HTML.
+
 ```
 div [class "foo", id "bar" ] [
   h1 [] [text "Hello"],
   p [] [text "World"]
 ] 
 ```
-Each takes attributes and elements. So we can nest them like HTML.
+
+There's a function for every element. Just be sure to expose what you use.
 
 
 ----
@@ -216,6 +240,7 @@ main =
   view
   
 
+view: Html
 view =
   div [] [
      p [
@@ -236,7 +261,7 @@ main =
     view "Goodbye"
   ]
   
-
+view: String -> Html
 view word =
   div [] [
      p [
@@ -267,11 +292,11 @@ Function that fires when state changes. Always returns a _new_ model.
 
 ## Signals and Mailboxes
 
-## Signals
+### Signals
 
 Signals route messages around the application. Pressing a button is a signal. We can send data along signals.
 
-## Mailboxes
+### Mailboxes
 
 Mailboxes receive signals and send signals. A mailbox has an address and a signal to respond to.
 
@@ -299,7 +324,7 @@ Like Flux, without all the code.
 
 ## Example
 
-```
+```elm
 type Action = Increment | Decrement
 
 main =
@@ -340,7 +365,7 @@ $$
 
 * Node.js <http://nodejs.org>
    
-   ```
+   ```shell
    $ npm install -g elm
    ```
    
@@ -354,20 +379,20 @@ $$
 
 Create folder and file to work in
 
-```
+```shell
 $ mkdir calculator && cd calculator
 $ touch calculator.elm
 ```
 
 Init the project
 
-```
+```shell
 $ elm package install
 ```
 
 Install HTML and StartApp
 
-```
+```shell
 $ elm package install evancz/elm-html
 $ elm package install evancz/start-app
 ```

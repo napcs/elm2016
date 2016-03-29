@@ -1,6 +1,6 @@
 # Rethinking Front End Development With Elm
 
-This year I released a book called *Exercises For Programmers*, which is a collection of programming practice problems aimed at beginning coders. However, the problems in the book 
+This year I released a book called *Exercises For Programmers*, which is a collection of programming practice problems aimed at beginning coders. However, the problems in the book are great for solving problems in any language. I'm using the book to learn Elm, and this talk is all about sharing what I've learned about this little powerful front-end language.
 
 ## What's Elm?
 
