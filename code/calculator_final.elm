@@ -7,14 +7,6 @@ import Signal exposing (Address)
 import String
 
 
-type alias Model =
-  { principle: String
-  , rate: String
-  , years: String
-  , periods: String
-  , newAmount: Float}
-
-
 type Action
   = NoOp
     | SetPrinciple String
@@ -23,7 +15,17 @@ type Action
     | SetYears String
     | Calculate
 
+type alias Model =
+  { principle: String
+  , rate: String
+  , years: String
+  , periods: String
+  , newAmount: Float}
 
+
+
+main =
+  StartApp.start { model = model , view = view , update = update }
 
 
 model: Model
@@ -39,7 +41,12 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div [] [
     h1 [] [text "Calculator"],
-    calculatorForm address model,
+    div [] [
+      numberField address SetPrinciple "principle" "Principle" model.principle,
+      numberField address SetRate "rate" "Rate" model.rate,
+      numberField address SetPeriods "periods" "Periods" model.periods,
+      numberField address SetYears "years" "Years" model.years
+    ],
     button [onClick address Calculate] [text "Click me"],
     output model
 
@@ -50,16 +57,6 @@ output model =
   div [] [
     span [] [text "Amount: "],
     span [] [text (toString model.newAmount) ]
-  ]
-
-
-calculatorForm: Signal.Address Action -> Model -> Html
-calculatorForm address model =
-  div [] [
-    numberField address SetPrinciple "principle" "Principle" model.principle,
-    numberField address SetRate "rate" "Rate" model.rate,
-    numberField address SetPeriods "periods" "Periods" model.periods,
-    numberField address SetYears "years" "Years" model.years
   ]
 
 
@@ -74,33 +71,21 @@ numberField address action fieldID name fieldValue =
 
 
 
-main =
-  StartApp.start
-    { model = model
-    , view = view
-    , update = update }
-
 
 update: Action -> Model -> Model
 update action model =
   case action of
-    NoOp ->
-      model
+    NoOp -> model
 
-    SetPrinciple p ->
-      {model | principle = p}
+    SetPrinciple p -> {model | principle = p}
 
-    SetRate r ->
-      {model | rate = r}
+    SetRate r -> {model | rate = r}
 
-    SetYears y ->
-      {model | years = y}
+    SetYears y -> {model | years = y}
 
-    SetPeriods p ->
-      {model | periods = p}
+    SetPeriods p -> {model | periods = p}
 
-    Calculate ->
-      calculateNewAmount model
+    Calculate -> calculateNewAmount model
 
 
 labelStyle: Attribute
