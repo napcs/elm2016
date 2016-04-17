@@ -117,7 +117,7 @@ React.render(<HelloMessage message="World" />, document.body);
 
 * Elm: ~5400 lines
 * React: ~19300 lines
-* Jquery: ~9800 lines
+* JQuery: ~9800 lines
 
 
 ----
@@ -553,7 +553,7 @@ view address model =
 * `StartApp` renders the view using an initial model state.
 * Events defined in the `view` send `Actions`  to `Signal Addresses` which route to  `update`.
 * `update` returns a new version of the model
-* `StartApp` causes the `view` to be rerendered whenever `model` changes.
+* `StartApp` causes the `view` to be rendered whenever `model` changes.
 
 ----
 
@@ -628,6 +628,18 @@ main =
 ```
 ----
 
+### Define a model and update
+
+```haskell
+model: Float
+model = 0
+
+update: String -> Float -> Float
+update action model =
+  model
+```
+
+----
 
 ### Building the form
 
@@ -860,8 +872,8 @@ Is this cool? Good? Bad? A terrible idea or the greatest thing ever?
 
 ### Issues
 
-1. Tons of code to do simple thins
-2. Integration with external services is complex.
+1. Tons of code to do simple things
+2. Integration with external services is complex
 3. Must re-learn a lot of things about web development
 4. Small community
 

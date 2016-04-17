@@ -9,6 +9,7 @@ main =
 
 -- model
 
+model: Float
 model = 0
 
 
@@ -23,7 +24,7 @@ view address model =
       numberField "rate" "Rate",
       numberField "years" "Periods",
       numberField "years" "Years"
-    ]
+    ],
     button [onClick address "calculate"] [text "Calculate"]
   ]
 
